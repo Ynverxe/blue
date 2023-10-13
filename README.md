@@ -21,8 +21,6 @@ A set of collections and utilities for Java.
 
 ### Gradle
 
-Kotlin
-
 ```kotlin
 repositories {
     mavenCentral()
