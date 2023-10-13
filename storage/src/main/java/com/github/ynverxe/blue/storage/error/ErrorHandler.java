@@ -1,4 +1,4 @@
-package com.github.ynverxe.storage4all.exception;
+package com.github.ynverxe.blue.storage.error;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

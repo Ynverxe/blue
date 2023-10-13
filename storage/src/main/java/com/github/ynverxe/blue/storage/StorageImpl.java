@@ -1,6 +1,6 @@
-package com.github.ynverxe.storage4all;
+package com.github.ynverxe.blue.storage;
 
-import com.github.ynverxe.storage4all.operation.Operation;
+import com.github.ynverxe.blue.storage.operation.Operation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractMap;

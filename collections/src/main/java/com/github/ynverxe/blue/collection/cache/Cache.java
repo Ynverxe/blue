@@ -1,18 +1,19 @@
-package com.github.ynverxe.xenov.common.cache;
+package com.github.ynverxe.blue.collection.cache;
 
-import net.kyori.examination.Examinable;
-import net.kyori.examination.ExaminableProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Stream;
 
-public interface Cache<V> extends Iterable<V>, Examinable {
+public interface Cache<V> extends Iterable<V> {
 
   @Nullable
   V find(@NotNull String key);
+
+  default @NotNull Cache<V> immutable() {
+    return new DelegatedCache<>(this);
+  }
 
   @Nullable
   default Map.Entry<String, V> atIndex(int index) {
@@ -59,14 +60,6 @@ public interface Cache<V> extends Iterable<V>, Examinable {
   @NotNull
   Class<?> valueType();
 
-  @Override
-  default @NotNull Stream<? extends ExaminableProperty> examinableProperties() {
-    return Stream.of(
-            ExaminableProperty.of("size", size()),
-            ExaminableProperty.of("valueType", valueTypeName()),
-            ExaminableProperty.of("content", asMap()));
-  }
-
   default String valueTypeName() {
     return valueType().getSimpleName();
   }
@@ -93,11 +86,11 @@ public interface Cache<V> extends Iterable<V>, Examinable {
 
   boolean hasKey(@NotNull String key);
 
-  static @NotNull <V> Cache<V> create(@NotNull Class<V> valueType, @NotNull Map<String, V> map) {
-    return new SimpleCache<>(map, valueType);
+  static @NotNull <V> Cache.Mutable<V> create(@NotNull Class<V> valueType, @NotNull Map<String, V> map) {
+    return new SimpleCache.Mutable<>(map, valueType);
   }
 
-  static @NotNull <V> Cache<V> concurrent(@NotNull Class<V> valueType) {
+  static @NotNull <V> Cache.Mutable<V> concurrent(@NotNull Class<V> valueType) {
     return create(valueType, new ConcurrentHashMap<>());
   }
 

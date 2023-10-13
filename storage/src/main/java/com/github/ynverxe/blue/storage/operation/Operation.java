@@ -1,6 +1,6 @@
-package com.github.ynverxe.storage4all.operation;
+package com.github.ynverxe.blue.storage.operation;
 
-import com.github.ynverxe.storage4all.exception.ErrorHandler;
+import com.github.ynverxe.blue.storage.error.ErrorHandler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 public interface Operation<T> {
 
-  static @NotNull <T> Operation<List<T>> ofSyncOperations(
+  static @NotNull <T> Operation<List<T>> listOf(
     @NotNull List<Operation<T>> operations, @Nullable Executor executor) {
     return new SimpleOperation<>(
       () -> {

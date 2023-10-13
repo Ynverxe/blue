@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.collection;
+package com.github.ynverxe.blue.collection.list;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

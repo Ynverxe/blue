@@ -1,4 +1,4 @@
-package com.github.ynverxe.bus.eventbus;
+package com.github.ynverxe.blue.eventbus;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,6 +10,14 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public interface EventNode<T> extends EventDispatcher<T>, EventConsumer<T> {
+
+  static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
+    return new EventNodeImpl<>(baseEventType, eventFilter);
+  }
+
+  static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType) {
+    return create(baseEventType, event -> true);
+  }
 
   <E extends T> void addEventConsumer(
     @NotNull Class<E> eventType, @NotNull EventConsumer<E> consumer);
@@ -33,12 +41,4 @@ public interface EventNode<T> extends EventDispatcher<T>, EventConsumer<T> {
   @NotNull List<EventNode<?>> childrenNodes();
 
   @NotNull Class<T> baseEventType();
-
-  static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
-    return new EventNodeImpl<>(baseEventType, eventFilter);
-  }
-
-  static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType) {
-    return create(baseEventType, event -> true);
-  }
 }

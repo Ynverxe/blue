@@ -1,4 +1,4 @@
-package com.github.ynverxe.xenov.common.cache;
+package com.github.ynverxe.blue.collection.cache;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,5 +49,22 @@ public class SimpleCache<V> implements Cache<V> {
   @Override
   public Iterator<V> iterator() {
     return Collections.unmodifiableCollection(backing.values()).iterator();
+  }
+
+  static class Mutable<V> extends SimpleCache<V> implements Cache.Mutable<V> {
+
+    public Mutable(@NotNull Map<String, V> backing, @NotNull Class<V> valueType) {
+      super(backing, valueType);
+    }
+
+    @Override
+    public V removeValue(@NotNull String key) {
+      return backing.remove(key);
+    }
+
+    @Override
+    public void clear() {
+      backing.clear();
+    }
   }
 }

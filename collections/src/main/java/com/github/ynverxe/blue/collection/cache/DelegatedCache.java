@@ -1,4 +1,4 @@
-package com.github.ynverxe.xenov.common.cache;
+package com.github.ynverxe.blue.collection.cache;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,45 +9,45 @@ import java.util.Map;
 
 public class DelegatedCache<V> implements Cache<V> {
 
-	private final Cache<V> delegate;
+  private final Cache<V> delegate;
 
-	public DelegatedCache(Cache<V> delegate) {
-		this.delegate = delegate;
-	}
+  public DelegatedCache(Cache<V> delegate) {
+    this.delegate = delegate;
+  }
 
-	@Override
-	public @Nullable V find(@NotNull String key) {
-		return delegate.find(key);
-	}
+  @Override
+  public @Nullable V find(@NotNull String key) {
+    return delegate.find(key);
+  }
 
-	@Override
-	public @NotNull Map<String, V> asMap() {
-		return delegate.asMap();
-	}
+  @Override
+  public @NotNull Map<String, V> asMap() {
+    return delegate.asMap();
+  }
 
-	@Override
-	public @NotNull List<String> keys() {
-		return delegate.keys();
-	}
+  @Override
+  public @NotNull List<String> keys() {
+    return delegate.keys();
+  }
 
-	@Override
-	public int size() {
-		return delegate.size();
-	}
+  @Override
+  public int size() {
+    return delegate.size();
+  }
 
-	@Override
-	public @NotNull Class<?> valueType() {
-		return delegate.valueType();
-	}
+  @Override
+  public @NotNull Class<?> valueType() {
+    return delegate.valueType();
+  }
 
-	@Override
-	public boolean hasKey(@NotNull String key) {
-		return delegate.hasKey(key);
-	}
+  @Override
+  public boolean hasKey(@NotNull String key) {
+    return delegate.hasKey(key);
+  }
 
-	@NotNull
-	@Override
-	public Iterator<V> iterator() {
-		return delegate.iterator();
-	}
+  @NotNull
+  @Override
+  public Iterator<V> iterator() {
+    return delegate.iterator();
+  }
 }

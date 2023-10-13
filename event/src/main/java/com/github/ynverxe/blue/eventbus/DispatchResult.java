@@ -1,4 +1,4 @@
-package com.github.ynverxe.bus.eventbus;
+package com.github.ynverxe.blue.eventbus;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,6 +24,10 @@ public class DispatchResult<T> {
     this.errors = errors;
   }
 
+  public static <T> @NotNull DispatchResult<T> nonDispatched(@NotNull T event) {
+    return new DispatchResult<>(false, event, Collections.emptyMap());
+  }
+
   public boolean dispatched() {
     return dispatched;
   }
@@ -34,9 +38,5 @@ public class DispatchResult<T> {
 
   public @NotNull Map<EventConsumer<? extends T>, Throwable> errors() {
     return errors;
-  }
-
-  public static <T> @NotNull DispatchResult<T> nonDispatched(@NotNull T event) {
-    return new DispatchResult<>(false, event, Collections.emptyMap());
   }
 }

@@ -1,6 +1,6 @@
-package com.github.ynverxe.storage4all;
+package com.github.ynverxe.blue.storage;
 
-import com.github.ynverxe.storage4all.operation.Operation;
+import com.github.ynverxe.blue.storage.operation.Operation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public interface Storage<T> {
       operations.add(saveModel(key, model).map(unused -> key));
     }
 
-    return Operation.ofSyncOperations(operations, null);
+    return Operation.listOf(operations, null);
   }
 
   @NotNull

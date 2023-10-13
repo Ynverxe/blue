@@ -1,2 +1,4 @@
-package com.github.ynverxe.blue.eventbus.event;public class InvalidEvent {
+package com.github.ynverxe.blue.eventbus.event;
+
+public class InvalidEvent implements TestEvent {
 }

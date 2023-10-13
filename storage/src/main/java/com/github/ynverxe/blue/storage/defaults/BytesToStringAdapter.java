@@ -1,6 +1,6 @@
-package com.github.ynverxe.storage4all.defaults;
+package com.github.ynverxe.blue.storage.defaults;
 
-import com.github.ynverxe.xenov.common.storage.DataAdapter;
+import com.github.ynverxe.blue.storage.DataAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.StandardCharsets;

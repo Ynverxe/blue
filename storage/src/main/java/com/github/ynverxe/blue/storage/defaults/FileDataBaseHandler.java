@@ -1,6 +1,6 @@
-package com.github.ynverxe.storage4all.defaults;
+package com.github.ynverxe.blue.storage.defaults;
 
-import com.github.ynverxe.xenov.common.storage.DatabaseHandler;
+import com.github.ynverxe.blue.storage.DatabaseHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,13 +13,13 @@ import java.util.List;
 
 import static java.nio.file.Files.*;
 
-public class DirectoryDataBaseHandler implements DatabaseHandler<byte[]> {
+public class FileDataBaseHandler implements DatabaseHandler<byte[]> {
 
-  private @NotNull File directory;
-  private @NotNull String format;
-  private @NotNull FilenameFilter filenameFilter;
+  private File directory;
+  private String format;
+  private FilenameFilter filenameFilter;
 
-  public DirectoryDataBaseHandler(@NotNull File directory, @NotNull String format)
+  public FileDataBaseHandler(@NotNull File directory, @NotNull String format)
     throws IOException {
     createDirectories(directory.toPath());
     this.directory = directory;
@@ -71,14 +71,15 @@ public class DirectoryDataBaseHandler implements DatabaseHandler<byte[]> {
     return keys;
   }
 
-  private File newFile(String key) {
-    return new File(directory, key + format);
-  }
-
   @Override
   public void close() throws IOException {
     directory = null;
     format = null;
     filenameFilter = null;
   }
+
+  private File newFile(String key) {
+    return new File(directory, key + format);
+  }
+
 }

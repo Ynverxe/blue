@@ -1,10 +1,11 @@
-package com.github.ynverxe.bus.eventbus;
+package com.github.ynverxe.blue.eventbus;
 
-import com.github.ynverxe.blue.collection.ReadWriteDelegatedList;
+import com.github.ynverxe.blue.eventbus.consumer.ExpirableConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,7 +15,7 @@ public class EventNodeImpl<T> implements EventNode<T> {
 
   private final @NotNull Class<T> baseEventType;
   private final Predicate<T> eventFilter;
-  private final List<RegisteredConsumer> consumers = new ReadWriteDelegatedList<>(false);
+  private final List<RegisteredConsumer> consumers = new CopyOnWriteArrayList<>();
 
   public EventNodeImpl(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
     this.baseEventType = baseEventType;
@@ -26,7 +27,7 @@ public class EventNodeImpl<T> implements EventNode<T> {
   }
 
   @Override
-  public void consume(@NotNull T event) {
+  public void consume(@NotNull EventDispatcher<T> caller, @NotNull T event) {
     dispatchEvent(event);
   }
 
@@ -42,7 +43,7 @@ public class EventNodeImpl<T> implements EventNode<T> {
 
     consumers.forEach(consumer -> {
       try {
-        consumer.consume(event);
+        consumer.consume(this, event);
       } catch (Throwable throwable) {
         errors.put(consumer, throwable);
       }
@@ -57,7 +58,13 @@ public class EventNodeImpl<T> implements EventNode<T> {
     if (consumer == this) return;
 
     if (matchConsumer((registeredType, registeredConsumer) ->
-            registeredType == eventType && consumer == registeredConsumer).isPresent()) return;
+      registeredType == eventType && consumer == registeredConsumer).isPresent()) return;
+
+    if (consumer instanceof ExpirableConsumer) {
+      if (((ExpirableConsumer<E>) consumer).expired()) return;
+
+      ((ExpirableConsumer<E>) consumer).handleExpiration(this::removeEventConsumer);
+    }
 
     this.consumers.add(new RegisteredConsumer(consumer, eventType));
   }
@@ -71,9 +78,7 @@ public class EventNodeImpl<T> implements EventNode<T> {
   public @NotNull List<EventConsumer<T>> removeEventConsumers(@NotNull ConsumerFilter<T> filter) {
     List<EventConsumer<T>> removed = new ArrayList<>();
 
-    Iterator<RegisteredConsumer> iterator = this.consumers.iterator();
-
-    for (RegisteredConsumer registeredConsumer = iterator.next(); iterator.hasNext(); registeredConsumer = iterator.next()) {
+    for (RegisteredConsumer registeredConsumer : this.consumers) {
       EventConsumer consumer = registeredConsumer.consumer;
       if (filter.check(registeredConsumer.eventType, consumer)) {
         removed.add(consumer);
@@ -147,9 +152,9 @@ public class EventNodeImpl<T> implements EventNode<T> {
   @Override
   public @NotNull List<EventNode<?>> childrenNodes() {
     return consumers.stream()
-            .filter(registeredConsumer -> registeredConsumer.consumer instanceof EventNode)
-            .map(registeredConsumer -> (EventNode<?>) registeredConsumer.consumer)
-            .collect(Collectors.toList());
+      .filter(registeredConsumer -> registeredConsumer.consumer instanceof EventNode)
+      .map(registeredConsumer -> (EventNode<?>) registeredConsumer.consumer)
+      .collect(Collectors.toList());
   }
 
   @Override
