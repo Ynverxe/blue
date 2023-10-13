@@ -5,12 +5,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class SimpleCache<V> implements Cache<V> {
+public class AbstractCache<V> implements Cache<V> {
 
   protected final @NotNull Map<String, V> backing;
   private final @NotNull Class<V> valueType;
 
-  public SimpleCache(@NotNull Map<String, V> backing, @NotNull Class<V> valueType) {
+  public AbstractCache(@NotNull Map<String, V> backing, @NotNull Class<V> valueType) {
     this.backing = backing;
     this.valueType = valueType;
   }
@@ -51,7 +51,7 @@ public class SimpleCache<V> implements Cache<V> {
     return Collections.unmodifiableCollection(backing.values()).iterator();
   }
 
-  static class Mutable<V> extends SimpleCache<V> implements Cache.Mutable<V> {
+  static class Mutable<V> extends AbstractCache<V> implements Cache.Mutable<V> {
 
     public Mutable(@NotNull Map<String, V> backing, @NotNull Class<V> valueType) {
       super(backing, valueType);

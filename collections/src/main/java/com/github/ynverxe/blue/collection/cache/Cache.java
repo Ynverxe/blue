@@ -86,11 +86,11 @@ public interface Cache<V> extends Iterable<V> {
 
   boolean hasKey(@NotNull String key);
 
-  static @NotNull <V> Cache.Mutable<V> create(@NotNull Class<V> valueType, @NotNull Map<String, V> map) {
-    return new SimpleCache.Mutable<>(map, valueType);
+  static @NotNull <V> CacheImpl<V> create(@NotNull Class<V> valueType, @NotNull Map<String, V> map) {
+    return new CacheImpl<>(map, valueType);
   }
 
-  static @NotNull <V> Cache.Mutable<V> concurrent(@NotNull Class<V> valueType) {
+  static @NotNull <V> CacheImpl<V> concurrent(@NotNull Class<V> valueType) {
     return create(valueType, new ConcurrentHashMap<>());
   }
 
