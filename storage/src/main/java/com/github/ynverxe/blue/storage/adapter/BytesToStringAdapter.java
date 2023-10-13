@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.defaults;
+package com.github.ynverxe.blue.storage.adapter;
 
 import com.github.ynverxe.blue.storage.DataAdapter;
 import org.jetbrains.annotations.NotNull;

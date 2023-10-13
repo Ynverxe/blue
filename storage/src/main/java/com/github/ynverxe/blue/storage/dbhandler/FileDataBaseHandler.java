@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.defaults;
+package com.github.ynverxe.blue.storage.dbhandler;
 
 import com.github.ynverxe.blue.storage.DatabaseHandler;
 import org.jetbrains.annotations.NotNull;
