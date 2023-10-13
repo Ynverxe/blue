@@ -1,7 +1,7 @@
-package com.github.ynverxe.blue.eventbus.consumer.handler;
+package com.github.ynverxe.blue.event.consumer.handler;
 
-import com.github.ynverxe.blue.eventbus.EventDispatcher;
-import com.github.ynverxe.blue.eventbus.consumer.RichEventConsumer;
+import com.github.ynverxe.blue.event.EventDispatcher;
+import com.github.ynverxe.blue.event.consumer.RichEventConsumer;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("rawtypes")

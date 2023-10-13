@@ -1,7 +1,7 @@
-package com.github.ynverxe.blue.eventbus.consumer;
+package com.github.ynverxe.blue.event.consumer;
 
-import com.github.ynverxe.blue.eventbus.EventConsumer;
-import com.github.ynverxe.blue.eventbus.EventDispatcher;
+import com.github.ynverxe.blue.event.EventConsumer;
+import com.github.ynverxe.blue.event.EventDispatcher;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

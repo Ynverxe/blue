@@ -1,8 +1,8 @@
-package com.github.ynverxe.blue.eventbus;
+package com.github.ynverxe.blue.event;
 
-import com.github.ynverxe.blue.eventbus.consumer.RichEventConsumer;
-import com.github.ynverxe.blue.eventbus.event.TestEvent;
-import com.github.ynverxe.blue.eventbus.event.ValidEvent;
+import com.github.ynverxe.blue.event.consumer.RichEventConsumer;
+import com.github.ynverxe.blue.event.event.TestEvent;
+import com.github.ynverxe.blue.event.event.ValidEvent;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

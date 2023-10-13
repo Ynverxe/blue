@@ -1,6 +1,6 @@
-package com.github.ynverxe.blue.eventbus;
+package com.github.ynverxe.blue.event;
 
-import com.github.ynverxe.blue.eventbus.consumer.ExpirableConsumer;
+import com.github.ynverxe.blue.event.consumer.ExpirableConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

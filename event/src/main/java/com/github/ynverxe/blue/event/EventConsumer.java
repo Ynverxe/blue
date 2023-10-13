@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.eventbus;
+package com.github.ynverxe.blue.event;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

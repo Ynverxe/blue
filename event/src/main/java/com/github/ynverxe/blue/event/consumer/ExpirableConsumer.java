@@ -1,6 +1,6 @@
-package com.github.ynverxe.blue.eventbus.consumer;
+package com.github.ynverxe.blue.event.consumer;
 
-import com.github.ynverxe.blue.eventbus.EventConsumer;
+import com.github.ynverxe.blue.event.EventConsumer;
 
 import java.util.function.Consumer;
 

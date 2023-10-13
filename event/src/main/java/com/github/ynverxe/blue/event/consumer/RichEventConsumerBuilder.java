@@ -1,7 +1,7 @@
-package com.github.ynverxe.blue.eventbus.consumer;
+package com.github.ynverxe.blue.event.consumer;
 
-import com.github.ynverxe.blue.eventbus.EventConsumer;
-import com.github.ynverxe.blue.eventbus.consumer.handler.ExpireOnExecutionHandler;
+import com.github.ynverxe.blue.event.EventConsumer;
+import com.github.ynverxe.blue.event.consumer.handler.ExpireOnExecutionHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
