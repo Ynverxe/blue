@@ -1,5 +1,7 @@
 name: Build with gradle on push
 on: [push]
+permissions: 
+  contents: read
 jobs:
   gradle:
     runs-on: ubuntu-latest
