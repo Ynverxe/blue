@@ -1,11 +1,13 @@
 package com.github.ynverxe.blue.event;
 
+import com.github.ynverxe.blue.event.consumer.RichEventConsumerBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -21,6 +23,13 @@ public interface EventNode<T> extends EventDispatcher<T>, EventConsumer<T> {
 
   <E extends T> void addEventConsumer(
     @NotNull Class<E> eventType, @NotNull EventConsumer<E> consumer);
+
+  default <E extends T> void addEventConsumer(
+    @NotNull Class<E> eventType, @NotNull Consumer<RichEventConsumerBuilder<E>> consumerConfigurator) {
+    RichEventConsumerBuilder<E> builder = new RichEventConsumerBuilder<>();
+    consumerConfigurator.accept(builder);
+    addEventConsumer(eventType, builder.build());
+  }
 
   void addGlobalConsumer(@NotNull EventConsumer<T> consumer);
 
