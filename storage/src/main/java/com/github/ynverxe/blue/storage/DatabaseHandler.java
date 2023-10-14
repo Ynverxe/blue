@@ -33,6 +33,6 @@ public interface DatabaseHandler<T> extends Closeable {
   }
 
   default @NotNull <O> DatabaseHandler<O> adapt(@NotNull DataAdapter<T, O> dataAdapter) {
-    return new AdaptedDirectoryDatabaseHandler<>(this, dataAdapter);
+    return new AdaptedDatabaseHandler<>(this, dataAdapter);
   }
 }

@@ -6,12 +6,12 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.List;
 
-public class AdaptedDirectoryDatabaseHandler<I, O> implements DatabaseHandler<O> {
+public class AdaptedDatabaseHandler<I, O> implements DatabaseHandler<O> {
 
   private final DatabaseHandler<I> backing;
   private final DataAdapter<I, O> dataAdapter;
 
-  AdaptedDirectoryDatabaseHandler(DatabaseHandler<I> backing, DataAdapter<I, O> dataAdapter) {
+  AdaptedDatabaseHandler(DatabaseHandler<I> backing, DataAdapter<I, O> dataAdapter) {
     this.backing = backing;
     this.dataAdapter = dataAdapter;
   }
