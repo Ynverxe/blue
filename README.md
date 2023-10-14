@@ -1,4 +1,6 @@
-# Blue
+# Blue 
+![](https://img.shields.io/github/actions/workflow/status/ynverxe/blue/build.yml)
+[![](https://jitpack.io/v/ynverxe/blue.svg)](https://jitpack.io/#ynverxe/blue)
 
 A set of collections and utilities for Java.
 
