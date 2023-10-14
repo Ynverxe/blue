@@ -15,7 +15,7 @@ A set of collections and utilities for Java.
 ```
 ```xml
 <dependency>
-    <groupId>com.github.Ynverxe.blue</groupId>
+    <groupId>com.github.ynverxe.blue</groupId>
     <artifactId>MODULE</artifactId>
     <version>VERSION</version>
 </dependency>
@@ -30,6 +30,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Ynverxe.blue:MODULE:VERSION")    
+    implementation("com.github.ynverxe.blue:MODULE:VERSION")    
 }
 ```
