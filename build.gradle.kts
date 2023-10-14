@@ -1,10 +1,8 @@
-plugins {
-    id("java-library")
-}
-
-group = "com.github.ynverxe"
-version = "1.0-SNAPSHOT"
-
 repositories {
     mavenCentral()
+}
+
+allprojects {
+    group = "com.github.ynverxe.blue"
+    version = "0.0.1"
 }
