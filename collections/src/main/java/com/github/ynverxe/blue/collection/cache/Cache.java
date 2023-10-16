@@ -79,6 +79,7 @@ public interface Cache<V> extends Iterable<V> {
       if (v.equals(value)) {
         return i;
       }
+      i++;
     }
 
     return -1;
