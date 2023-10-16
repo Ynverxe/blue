@@ -51,7 +51,7 @@ public class AbstractCache<V> implements Cache<V> {
     return Collections.unmodifiableCollection(backing.values()).iterator();
   }
 
-  static class Mutable<V> extends AbstractCache<V> implements Cache.Mutable<V> {
+  public static class Mutable<V> extends AbstractCache<V> implements Cache.Mutable<V> {
 
     public Mutable(@NotNull Map<String, V> backing, @NotNull Class<V> valueType) {
       super(backing, valueType);
