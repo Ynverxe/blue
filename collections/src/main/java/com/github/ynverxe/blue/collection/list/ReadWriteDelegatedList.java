@@ -16,8 +16,6 @@ public class ReadWriteDelegatedList<E> extends AbstractList<E> {
   private final List<E> delegate;
 
   public ReadWriteDelegatedList(boolean updateModCount, ReadWriteLock lock, List<E> delegate) {
-    delegate.clear();
-
     this.updateModCount = updateModCount;
     this.readLock = lock.readLock();
     this.writeLock = lock.writeLock();
