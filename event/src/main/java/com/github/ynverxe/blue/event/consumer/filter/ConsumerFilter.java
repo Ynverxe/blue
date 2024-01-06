@@ -1,5 +1,6 @@
-package com.github.ynverxe.blue.event;
+package com.github.ynverxe.blue.event.consumer.filter;
 
+import com.github.ynverxe.blue.event.consumer.EventConsumer;
 import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface
