@@ -1,5 +1,6 @@
 package com.github.ynverxe.blue.event;
 
+import com.github.ynverxe.blue.event.consumer.EventConsumer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;

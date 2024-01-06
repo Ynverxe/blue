@@ -1,6 +1,13 @@
 package com.github.ynverxe.blue.event;
 
-import com.github.ynverxe.blue.event.consumer.ExpirableConsumer;
+import com.github.ynverxe.blue.event.consumer.EventConsumer;
+import com.github.ynverxe.blue.event.consumer.complex.properties.APIConsumerProperties;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumerBuilder;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumer;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumerImpl;
+import com.github.ynverxe.blue.event.consumer.complex.handler.ConsumerHandler;
+import com.github.ynverxe.blue.event.consumer.complex.properties.ConsumerProperties;
+import com.github.ynverxe.blue.event.consumer.filter.ConsumerFilter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,15 +18,25 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class EventNodeImpl<T> implements EventNode<T> {
+public class EventNodeImpl<T> extends ComplexConsumerImpl<T> implements EventNode<T> {
 
   private final @NotNull Class<T> baseEventType;
   private final Predicate<T> eventFilter;
   private final List<RegisteredConsumer> consumers = new CopyOnWriteArrayList<>();
 
-  public EventNodeImpl(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
+  public EventNodeImpl(
+    @NotNull List<ConsumerHandler<T>> consumerHandlers,
+    @NotNull ConsumerProperties properties,
+    @NotNull Class<T> baseEventType,
+    @NotNull Predicate<T> eventFilter
+  ) {
+    super(consumerHandlers, EventConsumer.empty(), properties);
     this.baseEventType = baseEventType;
     this.eventFilter = eventFilter;
+  }
+
+  public EventNodeImpl(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
+    this(Collections.emptyList(), new ConsumerProperties(new HashMap<>()), baseEventType, eventFilter);
   }
 
   public EventNodeImpl(@NotNull Class<T> baseEventType) {
@@ -27,8 +44,10 @@ public class EventNodeImpl<T> implements EventNode<T> {
   }
 
   @Override
-  public void consume(@NotNull EventDispatcher<T> caller, @NotNull T event) {
+  public void consume(@NotNull EventDispatcher<T> caller, @NotNull T event) throws Throwable {
     dispatchEvent(event);
+
+    super.consume(caller, event);
   }
 
   @Override
@@ -60,18 +79,14 @@ public class EventNodeImpl<T> implements EventNode<T> {
     if (matchConsumer((registeredType, registeredConsumer) ->
       registeredType == eventType && consumer == registeredConsumer).isPresent()) return;
 
-    if (consumer instanceof ExpirableConsumer) {
-      if (((ExpirableConsumer<E>) consumer).expired()) return;
-
-      ((ExpirableConsumer<E>) consumer).handleExpiration(this::removeEventConsumer);
-    }
-
     this.consumers.add(new RegisteredConsumer(consumer, eventType));
   }
 
   @Override
   public void addGlobalConsumer(@NotNull EventConsumer<T> consumer) {
-    addEventConsumer(baseEventType, consumer);
+    ComplexConsumerBuilder<T, ?> builder = ComplexConsumer.newBuilder();
+    builder.backing(consumer).makeAbstract();
+    addEventConsumer(baseEventType, builder.build());
   }
 
   @Override
@@ -93,7 +108,7 @@ public class EventNodeImpl<T> implements EventNode<T> {
   public @Nullable <E extends T> EventConsumer<E> removeEventConsumer(@NotNull EventConsumer<E> eventConsumer) {
     List<EventConsumer<T>> removed = removeEventConsumers((type, consumer) -> consumer == eventConsumer);
 
-    return removed.size() != 0 ? (EventConsumer<E>) removed.get(0) : null;
+    return !removed.isEmpty() ? (EventConsumer<E>) removed.get(0) : null;
   }
 
   @Override
@@ -103,7 +118,11 @@ public class EventNodeImpl<T> implements EventNode<T> {
         EventConsumer consumer = registeredConsumer.consumer;
         Class consumerEventType = registeredConsumer.eventType;
 
-        return consumerEventType.equals(eventType) || consumerEventType.isAssignableFrom(eventType) && consumer.isAbstract();
+        if (APIConsumerProperties.ABSTRACT.isPresent(consumer)) {
+          return consumerEventType.isAssignableFrom(eventType);
+        }
+
+        return consumerEventType.equals(eventType);
       })
       .map(registeredConsumer -> registeredConsumer.consumer);
   }
@@ -155,11 +174,6 @@ public class EventNodeImpl<T> implements EventNode<T> {
       .filter(registeredConsumer -> registeredConsumer.consumer instanceof EventNode)
       .map(registeredConsumer -> (EventNode<?>) registeredConsumer.consumer)
       .collect(Collectors.toList());
-  }
-
-  @Override
-  public boolean isAbstract() {
-    return true;
   }
 
   @Override
