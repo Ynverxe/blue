@@ -87,4 +87,13 @@ public final class EventNodeTest {
       });
     });
   }
+
+  @Test
+  public void testGlobalConsumerExecution() {
+    EventNode<TestEvent> eventNode = EventNode.create(TestEvent.class);
+    AtomicBoolean executed = new AtomicBoolean();
+    eventNode.addGlobalConsumer((caller, event) -> executed.set(true));
+    eventNode.dispatchEvent(new ValidEvent());
+    assertTrue(executed.get());
+  }
 }
