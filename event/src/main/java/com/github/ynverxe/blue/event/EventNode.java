@@ -1,6 +1,9 @@
 package com.github.ynverxe.blue.event;
 
-import com.github.ynverxe.blue.event.consumer.RichEventConsumerBuilder;
+import com.github.ynverxe.blue.event.consumer.EventConsumer;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumerBuilder;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumer;
+import com.github.ynverxe.blue.event.consumer.filter.ConsumerFilter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +15,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public interface EventNode<T> extends EventDispatcher<T>, EventConsumer<T> {
+public interface EventNode<T> extends EventDispatcher<T>, ComplexConsumer<T> {
 
   static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
     return new EventNodeImpl<>(baseEventType, eventFilter);
@@ -25,8 +29,8 @@ public interface EventNode<T> extends EventDispatcher<T>, EventConsumer<T> {
     @NotNull Class<E> eventType, @NotNull EventConsumer<E> consumer);
 
   default <E extends T> void addEventConsumer(
-    @NotNull Class<E> eventType, @NotNull Consumer<RichEventConsumerBuilder<E>> consumerConfigurator) {
-    RichEventConsumerBuilder<E> builder = new RichEventConsumerBuilder<>();
+    @NotNull Class<E> eventType, @NotNull Consumer<ComplexConsumerBuilder<E, ?>> consumerConfigurator) {
+    ComplexConsumerBuilder<E, ?> builder = ComplexConsumer.newBuilder();
     consumerConfigurator.accept(builder);
     addEventConsumer(eventType, builder.build());
   }

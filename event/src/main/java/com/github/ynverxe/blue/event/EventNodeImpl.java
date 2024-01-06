@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class EventNodeImpl<T> implements EventNode<T> {
+public class EventNodeImpl<T> extends ComplexConsumerImpl<T> implements EventNode<T> {
 
   private final @NotNull Class<T> baseEventType;
   private final Predicate<T> eventFilter;
@@ -71,7 +71,9 @@ public class EventNodeImpl<T> implements EventNode<T> {
 
   @Override
   public void addGlobalConsumer(@NotNull EventConsumer<T> consumer) {
-    addEventConsumer(baseEventType, consumer);
+    ComplexConsumerBuilder<T, ?> builder = ComplexConsumer.newBuilder();
+    builder.backing(consumer).makeAbstract();
+    addEventConsumer(baseEventType, builder.build());
   }
 
   @Override

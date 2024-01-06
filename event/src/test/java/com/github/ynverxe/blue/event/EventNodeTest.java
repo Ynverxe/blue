@@ -24,7 +24,8 @@ public final class EventNodeTest {
     EventNode<TestEvent> eventNode = EventNode.create(TestEvent.class);
 
     AtomicInteger firedConsumers = new AtomicInteger();
-    eventNode.addEventConsumer(TestEvent.class, EventConsumer.newAbstract((caller, event) -> firedConsumers.incrementAndGet()));
+    eventNode.addEventConsumer(TestEvent.class, builder ->
+      builder.backing((caller, event) -> firedConsumers.incrementAndGet()).makeAbstract());
 
     eventNode.dispatchEvent(new InvalidEvent());
     eventNode.dispatchEvent(new ValidEvent());
@@ -40,7 +41,9 @@ public final class EventNodeTest {
     EventNode<TestEvent> head = EventNode.create(TestEvent.class);
 
     // receives all TestEvent implementations
-    EventNode<TestEvent> children = EventNode.create(TestEvent.class);
+    EventNode<TestEvent> children = EventNode.newBuilder(TestEvent.class)
+        .makeAbstract().build();
+
     children.addEventConsumer(ValidEvent.class, defConsumer);
     children.addEventConsumer(InvalidEvent.class, defConsumer);
 
