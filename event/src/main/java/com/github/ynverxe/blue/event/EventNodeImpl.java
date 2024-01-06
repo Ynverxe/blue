@@ -1,6 +1,13 @@
 package com.github.ynverxe.blue.event;
 
-import com.github.ynverxe.blue.event.consumer.ExpirableConsumer;
+import com.github.ynverxe.blue.event.consumer.EventConsumer;
+import com.github.ynverxe.blue.event.consumer.complex.properties.APIConsumerProperties;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumerBuilder;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumer;
+import com.github.ynverxe.blue.event.consumer.complex.ComplexConsumerImpl;
+import com.github.ynverxe.blue.event.consumer.complex.handler.ConsumerHandler;
+import com.github.ynverxe.blue.event.consumer.complex.properties.ConsumerProperties;
+import com.github.ynverxe.blue.event.consumer.filter.ConsumerFilter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,7 +112,11 @@ public class EventNodeImpl<T> extends ComplexConsumerImpl<T> implements EventNod
         EventConsumer consumer = registeredConsumer.consumer;
         Class consumerEventType = registeredConsumer.eventType;
 
-        return consumerEventType.equals(eventType) || consumerEventType.isAssignableFrom(eventType) && consumer.isAbstract();
+        if (APIConsumerProperties.ABSTRACT.isPresent(consumer)) {
+          return consumerEventType.isAssignableFrom(eventType);
+        }
+
+        return consumerEventType.equals(eventType);
       })
       .map(registeredConsumer -> registeredConsumer.consumer);
   }
