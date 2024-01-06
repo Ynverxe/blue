@@ -14,11 +14,14 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public interface EventNode<T> extends EventDispatcher<T>, EventConsumer<T> {
 public interface EventNode<T> extends EventDispatcher<T>, ComplexConsumer<T> {
 
+  static <T> @NotNull EventNodeBuilder<T> newBuilder(@NotNull Class<T> baseEventType) {
+    return new EventNodeBuilder<>(baseEventType);
+  }
+
   static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType, @NotNull Predicate<T> eventFilter) {
-    return new EventNodeImpl<>(baseEventType, eventFilter);
+    return newBuilder(baseEventType).eventFilter(eventFilter).build();
   }
 
   static <T> @NotNull EventNode<T> create(@NotNull Class<T> baseEventType) {
