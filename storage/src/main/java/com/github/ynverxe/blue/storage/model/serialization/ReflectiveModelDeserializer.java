@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.internal.serialization;
+package com.github.ynverxe.blue.storage.model.serialization;
 
 import com.github.ynverxe.blue.storage.annotation.DeserializationVia;
 import org.jetbrains.annotations.NotNull;
