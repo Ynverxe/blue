@@ -1,5 +1,6 @@
 package com.github.ynverxe.blue.storage.crud;
 
+import com.github.ynverxe.blue.storage.crud.adapter.RawDataAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,4 +23,7 @@ public interface CrudRepository<T> {
 
   boolean delete(@NotNull String key);
 
+  default <O> @NotNull AdaptedCrudRepository<T, O> withAdapter(@NotNull RawDataAdapter<T, O> adapter) {
+    return new AdaptedCrudRepository<>(this, adapter);
+  }
 }
