@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.internal;
+package com.github.ynverxe.blue.storage.internal.repository;
 
 import com.github.ynverxe.blue.storage.ModelStorage;
 import com.github.ynverxe.blue.storage.crud.CrudRepository;
@@ -127,7 +127,7 @@ public class ModelRepositoryImpl<D, T extends SavableModel> implements ModelRepo
   }
 
   private ModelSerializer<D, T> serializer() {
-    return holder.serializer();
+    return holder.modelSerializer();
   }
 
   private Consumer<Throwable> errorHandler() {
