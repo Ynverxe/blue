@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.internal.repository;
+package com.github.ynverxe.blue.storage.model.repository;
 
 import com.github.ynverxe.blue.storage.ModelStorage;
 import com.github.ynverxe.blue.storage.crud.repository.CrudRepository;
