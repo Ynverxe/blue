@@ -2,9 +2,7 @@ package com.github.ynverxe.blue.storage.model.repository;
 
 import com.github.ynverxe.blue.storage.ModelStorage;
 import com.github.ynverxe.blue.storage.crud.repository.CrudRepository;
-import com.github.ynverxe.blue.storage.model.ModelSerializer;
-import com.github.ynverxe.blue.storage.model.repository.ModelRepository;
-import com.github.ynverxe.blue.storage.model.repository.SavableModel;
+import com.github.ynverxe.blue.storage.model.serialization.ModelSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

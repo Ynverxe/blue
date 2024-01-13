@@ -1,7 +1,5 @@
 package com.github.ynverxe.blue.storage.model.serialization;
 
-import com.github.ynverxe.blue.storage.model.AutoSerializableModel;
-import com.github.ynverxe.blue.storage.model.ModelSerializer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;

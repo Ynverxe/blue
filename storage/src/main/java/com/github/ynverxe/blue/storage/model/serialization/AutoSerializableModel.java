@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.model;
+package com.github.ynverxe.blue.storage.model.serialization;
 
 import org.jetbrains.annotations.NotNull;
 
