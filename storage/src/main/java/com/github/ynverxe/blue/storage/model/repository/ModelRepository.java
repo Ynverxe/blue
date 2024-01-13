@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.repository;
+package com.github.ynverxe.blue.storage.model.repository;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
