@@ -1,6 +1,6 @@
 package com.github.ynverxe.blue.storage;
 
-import com.github.ynverxe.blue.storage.crud.CrudRepository;
+import com.github.ynverxe.blue.storage.crud.repository.CrudRepository;
 import com.github.ynverxe.blue.storage.internal.repository.ModelRepositoryImpl;
 import com.github.ynverxe.blue.storage.model.ModelSerializer;
 import com.github.ynverxe.blue.storage.repository.ModelRepository;

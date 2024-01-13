@@ -1,9 +1,9 @@
-package com.github.ynverxe.blue.storage.crud.types;
+package com.github.ynverxe.blue.storage.crud.repository.types;
 
-import com.github.ynverxe.blue.storage.crud.AdaptedCrudRepository;
-import com.github.ynverxe.blue.storage.crud.CrudRepository;
-import com.github.ynverxe.blue.storage.crud.adapter.RawDataAdapter;
-import com.github.ynverxe.blue.storage.crud.adapter.defaults.StringToJsonAdapter;
+import com.github.ynverxe.blue.storage.crud.repository.AdaptedCrudRepository;
+import com.github.ynverxe.blue.storage.crud.repository.CrudRepository;
+import com.github.ynverxe.blue.storage.crud.repository.adapter.RawDataAdapter;
+import com.github.ynverxe.blue.storage.crud.repository.adapter.defaults.StringToJsonAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 

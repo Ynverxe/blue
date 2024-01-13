@@ -1,6 +1,6 @@
-package com.github.ynverxe.blue.storage.crud.adapter.defaults;
+package com.github.ynverxe.blue.storage.crud.repository.adapter.defaults;
 
-import com.github.ynverxe.blue.storage.crud.adapter.RawDataAdapter;
+import com.github.ynverxe.blue.storage.crud.repository.adapter.RawDataAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.StandardCharsets;

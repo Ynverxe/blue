@@ -1,4 +1,4 @@
-package com.github.ynverxe.blue.storage.crud.adapter;
+package com.github.ynverxe.blue.storage.crud.repository.adapter;
 
 import org.jetbrains.annotations.NotNull;
 
