@@ -4,6 +4,7 @@ import com.github.ynverxe.blue.storage.crud.repository.adapter.RawDataAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -62,5 +63,15 @@ public class AdaptedCrudRepository<I, O> implements CrudRepository<O> {
     data.forEach((key, value) -> adapted.put(key, adapter.adaptToNewData(value)));
 
     return adapted;
+  }
+
+  @Override
+  public boolean isClosed() {
+    return backing.isClosed();
+  }
+
+  @Override
+  public void close() throws IOException {
+    backing.close();
   }
 }

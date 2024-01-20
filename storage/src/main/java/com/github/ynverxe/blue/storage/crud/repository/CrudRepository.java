@@ -1,6 +1,7 @@
 package com.github.ynverxe.blue.storage.crud.repository;
 
 import com.github.ynverxe.blue.storage.crud.repository.adapter.RawDataAdapter;
+import com.github.ynverxe.blue.storage.util.Closeable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  *
  * @param <T> The data type that this repository uses.
  */
-public interface CrudRepository<T> {
+public interface CrudRepository<T> extends Closeable {
 
   void save(@NotNull String key, @NotNull T data);
 
