@@ -71,7 +71,7 @@ public class AdaptedCrudRepository<I, O> implements CrudRepository<O> {
   }
 
   @Override
-  public void close() throws IOException {
+  public void close() throws Exception {
     backing.close();
   }
 }
