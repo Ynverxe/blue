@@ -9,7 +9,9 @@ repositories {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":storage")))
+    implementation(project(":storage"))
+    implementation(project(":sql"))
+    compileOnly("com.zaxxer:HikariCP:4.0.3")
     testImplementation("com.mysql:mysql-connector-j:8.3.0")
     testImplementation("com.google.code.gson:gson:2.10.1")
 }
