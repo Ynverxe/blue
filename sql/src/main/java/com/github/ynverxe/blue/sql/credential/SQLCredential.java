@@ -49,7 +49,9 @@ public class SQLCredential {
   }
 
   public String formatJdbcUrl(@NotNull String url) {
-    return String.format(url, ip, port);
+    return url.replace("<ip>", ip)
+      .replace("<port>", port)
+      .replace("<db>", database);
   }
 
   public Map<String, Object> toMap() {
