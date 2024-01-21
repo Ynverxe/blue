@@ -113,8 +113,7 @@ public class SQLTextRepository implements TextCrudRepository {
   }
 
   private <T> T executeQuery(String query, ResultSetMapper<T> mapper, Object... parameters) {
-    try {
-      PreparedStatement statement = connection().prepareStatement(query);
+    try (PreparedStatement statement = connection().prepareStatement(query)) {
       for (int i = 1; i <= parameters.length; i++) {
         statement.setObject(i, parameters[i - 1]);
       }
