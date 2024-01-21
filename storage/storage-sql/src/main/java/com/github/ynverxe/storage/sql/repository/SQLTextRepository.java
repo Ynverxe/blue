@@ -2,6 +2,7 @@ package com.github.ynverxe.storage.sql.repository;
 
 import com.github.ynverxe.blue.storage.crud.repository.types.TextCrudRepository;
 import com.github.ynverxe.storage.sql.repository.query.ParameterizedQueryFactory;
+import com.github.ynverxe.storage.sql.repository.source.ConnectionSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,11 +16,11 @@ import java.util.Map;
 public class SQLTextRepository implements TextCrudRepository {
 
   private final @NotNull ParameterizedQueryFactory queryFactory;
-  private final @NotNull Connection connection;
+  private final @NotNull ConnectionSource connectionSource;
 
-  public SQLTextRepository(@NotNull ParameterizedQueryFactory queryFactory, @NotNull Connection connection) {
+  public SQLTextRepository(@NotNull ParameterizedQueryFactory queryFactory, @NotNull ConnectionSource connectionSource) {
     this.queryFactory = queryFactory;
-    this.connection = connection;
+    this.connectionSource = connectionSource;
 
     executeUpdate(queryFactory.createTableCreationQuery());
   }
@@ -66,7 +67,7 @@ public class SQLTextRepository implements TextCrudRepository {
   @Override
   public boolean isClosed() {
     try {
-      return connection.isClosed();
+      return connection().isClosed();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -74,11 +75,15 @@ public class SQLTextRepository implements TextCrudRepository {
 
   @Override
   public void close() throws Exception {
-    connection.close();
+    connection().close();
   }
 
   public @NotNull Connection connection() {
-    return connection;
+    return connectionSource.connection();
+  }
+
+  public @NotNull ConnectionSource connectionSource() {
+    return connectionSource;
   }
 
   public @NotNull ParameterizedQueryFactory queryFactory() {
@@ -97,7 +102,7 @@ public class SQLTextRepository implements TextCrudRepository {
   }
 
   private int executeUpdate(String query, Object... parameters) {
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
+    try (PreparedStatement statement = connection().prepareStatement(query)) {
       for (int i = 1; i <= parameters.length; i++) {
         statement.setObject(i, parameters[i - 1]);
       }
@@ -109,7 +114,7 @@ public class SQLTextRepository implements TextCrudRepository {
 
   private <T> T executeQuery(String query, ResultSetMapper<T> mapper, Object... parameters) {
     try {
-      PreparedStatement statement = connection.prepareStatement(query);
+      PreparedStatement statement = connection().prepareStatement(query);
       for (int i = 1; i <= parameters.length; i++) {
         statement.setObject(i, parameters[i - 1]);
       }
