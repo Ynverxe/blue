@@ -1,7 +1,7 @@
 package com.github.ynverxe.storage.sql;
 
 import com.github.ynverxe.blue.storage.crud.repository.types.TextCrudRepository;
-import com.github.ynverxe.storage.sql.repository.SQLKeyJsonValueTextRepository;
+import com.github.ynverxe.storage.sql.repository.SQLTextRepository;
 import com.github.ynverxe.storage.sql.repository.query.defaults.MySQLJsonQueryFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -29,7 +29,7 @@ public class SQLRepositoryTest {
       if (connection != null) {
         dropTestTable();
 
-        REPOSITORY = new SQLKeyJsonValueTextRepository(
+        REPOSITORY = new SQLTextRepository(
           new MySQLJsonQueryFactory("JSON_TABLE_TEST", "id", "jsonValue"), MySQLConnectionProvider.CONNECTION
         );
       } else {

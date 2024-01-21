@@ -12,12 +12,12 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class SQLKeyJsonValueTextRepository implements TextCrudRepository {
+public class SQLTextRepository implements TextCrudRepository {
 
   private final @NotNull ParameterizedQueryFactory queryFactory;
   private final @NotNull Connection connection;
 
-  public SQLKeyJsonValueTextRepository(@NotNull ParameterizedQueryFactory queryFactory, @NotNull Connection connection) {
+  public SQLTextRepository(@NotNull ParameterizedQueryFactory queryFactory, @NotNull Connection connection) {
     this.queryFactory = queryFactory;
     this.connection = connection;
 
