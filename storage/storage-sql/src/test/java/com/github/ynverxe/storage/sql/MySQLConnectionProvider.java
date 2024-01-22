@@ -14,10 +14,10 @@ public class MySQLConnectionProvider {
   public static final Connection CONNECTION;
 
   static {
-    CONNECTION = connectWithH2TestDB();
+    CONNECTION = connectWithMySQLTestDb();
   }
 
-  private static Connection connectWithH2TestDB() {
+  private static Connection connectWithMySQLTestDb() {
     try {
       Properties credentials = new Properties();
       File credentialsFile = Paths.get("src/test/resources/mysql-test-credentials.properties")
