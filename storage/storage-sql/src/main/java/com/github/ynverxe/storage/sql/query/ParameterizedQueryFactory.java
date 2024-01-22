@@ -1,4 +1,4 @@
-package com.github.ynverxe.storage.sql.repository.query;
+package com.github.ynverxe.storage.sql.query;
 
 import org.jetbrains.annotations.NotNull;
 

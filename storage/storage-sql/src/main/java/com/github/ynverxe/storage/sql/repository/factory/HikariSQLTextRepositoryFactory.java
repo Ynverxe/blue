@@ -2,8 +2,8 @@ package com.github.ynverxe.storage.sql.repository.factory;
 
 import com.github.ynverxe.blue.sql.credential.SQLCredential;
 import com.github.ynverxe.blue.sql.hikari.HikariHelper;
-import com.github.ynverxe.storage.sql.repository.query.ParameterizedQueryFactory;
-import com.github.ynverxe.storage.sql.repository.source.ConnectionSource;
+import com.github.ynverxe.storage.sql.query.ParameterizedQueryFactory;
+import com.github.ynverxe.storage.sql.source.ConnectionSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.jetbrains.annotations.NotNull;

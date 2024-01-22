@@ -1,6 +1,6 @@
-package com.github.ynverxe.storage.sql.repository.query.defaults;
+package com.github.ynverxe.storage.sql.query.defaults;
 
-import com.github.ynverxe.storage.sql.repository.query.ParameterizedQueryFactory;
+import com.github.ynverxe.storage.sql.query.ParameterizedQueryFactory;
 import org.jetbrains.annotations.NotNull;
 
 import static java.lang.String.format;

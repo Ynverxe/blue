@@ -2,8 +2,8 @@ package com.github.ynverxe.storage.sql;
 
 import com.github.ynverxe.blue.storage.crud.repository.types.TextCrudRepository;
 import com.github.ynverxe.storage.sql.repository.SQLTextRepository;
-import com.github.ynverxe.storage.sql.repository.query.defaults.MySQLJsonQueryFactory;
-import com.github.ynverxe.storage.sql.repository.source.ConnectionSource;
+import com.github.ynverxe.storage.sql.query.defaults.MySQLJsonQueryFactory;
+import com.github.ynverxe.storage.sql.source.ConnectionSource;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.*;

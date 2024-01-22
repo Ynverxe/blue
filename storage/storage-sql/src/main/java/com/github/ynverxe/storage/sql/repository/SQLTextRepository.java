@@ -1,8 +1,8 @@
 package com.github.ynverxe.storage.sql.repository;
 
 import com.github.ynverxe.blue.storage.crud.repository.types.TextCrudRepository;
-import com.github.ynverxe.storage.sql.repository.query.ParameterizedQueryFactory;
-import com.github.ynverxe.storage.sql.repository.source.ConnectionSource;
+import com.github.ynverxe.storage.sql.query.ParameterizedQueryFactory;
+import com.github.ynverxe.storage.sql.source.ConnectionSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

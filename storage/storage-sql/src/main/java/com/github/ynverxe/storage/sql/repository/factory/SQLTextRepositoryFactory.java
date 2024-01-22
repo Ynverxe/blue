@@ -5,11 +5,10 @@ import com.github.ynverxe.blue.sql.vendor.KnownVendor;
 import com.github.ynverxe.blue.storage.crud.repository.factory.CrudRepositoryFactory;
 import com.github.ynverxe.blue.storage.crud.repository.factory.context.CrudRepositoryParameters;
 import com.github.ynverxe.storage.sql.repository.SQLTextRepository;
-import com.github.ynverxe.storage.sql.repository.query.ParameterizedQueryFactory;
-import com.github.ynverxe.storage.sql.repository.source.ConnectionSource;
+import com.github.ynverxe.storage.sql.query.ParameterizedQueryFactory;
+import com.github.ynverxe.storage.sql.source.ConnectionSource;
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
