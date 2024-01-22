@@ -5,5 +5,5 @@ plugins {
 version = "0.0.1"
 
 dependencies {
-    implementation("org.json:json:20231013")
+    compileOnly("com.zaxxer:HikariCP:4.0.3")
 }
