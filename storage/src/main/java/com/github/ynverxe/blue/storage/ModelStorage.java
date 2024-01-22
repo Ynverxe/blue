@@ -55,7 +55,7 @@ public class ModelStorage<D, T extends SavableModel> {
     return crudRepository;
   }
 
-  public synchronized void setCrudRepository(@NotNull CrudRepository<D> crudRepository) {
+  public void setCrudRepository(@NotNull CrudRepository<D> crudRepository) {
     this.crudRepository = crudRepository;
   }
 
@@ -63,7 +63,7 @@ public class ModelStorage<D, T extends SavableModel> {
     return modelSerializer;
   }
 
-  public synchronized void setModelSerializer(@NotNull ModelSerializer<D, T> modelSerializer) {
+  public void setModelSerializer(@NotNull ModelSerializer<D, T> modelSerializer) {
     this.modelSerializer = modelSerializer;
   }
 
@@ -71,7 +71,7 @@ public class ModelStorage<D, T extends SavableModel> {
     return executor;
   }
 
-  public synchronized void setExecutor(@NotNull Executor executor) {
+  public void setExecutor(@NotNull Executor executor) {
     this.executor = executor;
   }
 
@@ -79,7 +79,7 @@ public class ModelStorage<D, T extends SavableModel> {
     return errorHandler;
   }
 
-  public synchronized void setErrorHandler(@NotNull Consumer<Throwable> errorHandler) {
+  public void setErrorHandler(@NotNull Consumer<Throwable> errorHandler) {
     this.errorHandler = errorHandler;
   }
 
