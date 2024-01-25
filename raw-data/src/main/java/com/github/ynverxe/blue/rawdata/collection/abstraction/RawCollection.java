@@ -1,5 +1,6 @@
 package com.github.ynverxe.blue.rawdata.collection.abstraction;
 
+import org.jetbrains.annotations.ApiStatus;
 import com.github.ynverxe.blue.rawdata.collection.abstraction.builder.RawCollectionBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * @param <B> The builder type for this Collection
  * @param <U> The unknown collection type that this Collection can consume
  */
+@ApiStatus.NonExtendable
 public interface RawCollection<V, B extends RawCollectionBuilder<?, ?>, U> extends RawCollectionView<B> {
 
   boolean allowNullValues();
