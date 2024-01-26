@@ -158,6 +158,10 @@ public interface RawValue extends Serializable {
       return ((RawValue) value);
     }
 
+    if (value instanceof RawDataSerializable) {
+      return ((RawDataSerializable) value).toRawData();
+    }
+
     return primitive(value);
   }
 }
