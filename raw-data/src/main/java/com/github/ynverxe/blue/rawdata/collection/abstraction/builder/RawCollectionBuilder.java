@@ -17,8 +17,10 @@ public interface RawCollectionBuilder<C extends RawCollection<?, ?, ?>, B> {
   @Contract("_ -> this")
   @NotNull RawCollectionBuilder<C, B> allowNullValues(boolean allow);
 
+  @Contract("_ -> this")
   @NotNull RawCollectionBuilder<C, B> contents(@NotNull B contents);
 
+  @Contract("_ -> this")
   @NotNull RawCollectionBuilder<C, B> backingProvider(@NotNull Supplier<B> backingProvider);
 
   @NotNull C build();
