@@ -130,7 +130,10 @@ public interface RawValue extends Serializable {
   }
 
   /**
-   * The value that this object holds;
+   * The value that this object holds.
+   * For {@link PrimitiveValue} this method returns his internal value.
+   * By the other part, for collections {@link RawListView} & {@link RawMapView}
+   * instances returns his same reference (this).
    */
   @NotNull Object value();
 
